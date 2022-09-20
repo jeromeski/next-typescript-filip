@@ -64,3 +64,19 @@ export default function play() {
 
   return getUserData;
 }
+
+const playTwo = () => {
+  const strArr: string[] = ['a', 'b'];
+  const numArr: Array<number> = [1, 2];
+
+  // narrowing
+  const randomNum = Math.random() > 0.5 ? 'hello' : [1, 2];
+  if (typeof randomNum === 'string') {
+    const transUpper = randomNum.toUpperCase();
+    return transUpper;
+  } else {
+    return randomNum;
+  }
+};
+
+console.log(playTwo());
