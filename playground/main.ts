@@ -80,3 +80,35 @@ const playTwo = () => {
 };
 
 console.log(playTwo());
+
+interface Hero {
+  hp: number;
+  mp: number;
+}
+
+interface Warrior extends Hero {
+  sword: string;
+}
+
+interface Mage extends Hero {
+  staff: string;
+}
+
+const playThree = () => {
+  const hero1: Warrior = {
+    hp: 1000,
+    mp: 500,
+    sword: 'gladius',
+  };
+  console.log(hero1);
+
+  const hero2: Mage = {
+    hp: 500,
+    mp: 1000,
+    staff: 'staff of the zodiac',
+  };
+
+  console.log(hero2);
+};
+
+playThree();
