@@ -1,3 +1,12 @@
+class Person {
+  name: string;
+  age: number;
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
 // interface PersonUserInfo {
 //   (name: string, age: number): string;
 // }
@@ -9,10 +18,10 @@ type PersonUserInfo = (name: string, age: number) => string;
 //   age: number;
 // };
 
-interface Person {
-  name: string;
-  age: number;
-}
+// interface Person {
+//   name: string;
+//   age: number;
+// }
 
 export default function play() {
   const name = 'Jerome';
@@ -20,7 +29,7 @@ export default function play() {
   // const name = true;
   // const age = false;
 
-  const person: Person = {
+  const person = {
     name,
     age,
   };
@@ -41,7 +50,7 @@ export default function play() {
   }
 
   console.log(getUserInfo2(person));
-  console.log(getUserInfo3(person));
+  console.log(getUserInfo3(new Person('Edward', 42)));
   const getUserData = getUserInfo(name, age);
 
   return getUserData;
