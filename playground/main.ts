@@ -69,7 +69,12 @@ const playTwo = () => {
   const strArr: string[] = ['a', 'b'];
   const numArr: Array<number> = [1, 2];
 
-  // narrowing
+  /*
+   *
+   * ---------------
+   *    NARROWING
+   * ---------------
+   */
   const randomNum = Math.random() > 0.5 ? 'hello' : [1, 2];
   if (typeof randomNum === 'string') {
     const transUpper = randomNum.toUpperCase();
@@ -80,6 +85,12 @@ const playTwo = () => {
 };
 
 console.log(playTwo());
+
+/*
+ * ===============
+ *    EXTENDS
+ * ===============
+ */
 
 interface Hero {
   hp: number;
@@ -112,3 +123,87 @@ const playThree = () => {
 };
 
 playThree();
+
+/*
+ * ===============
+ *      UNION
+ * ===============
+ *
+ *  vertical bar | <-- union sign
+ */
+
+type RaceCar = {
+  name: string;
+  topSpeed: number;
+  team: string;
+};
+
+type CityCar = {
+  name: string;
+  space: string;
+  topSpeed: 100;
+};
+
+type Car = RaceCar | CityCar;
+
+function playFour() {
+  // const logCarInfo = (car: RaceCar | CityCar) => {
+  //   console.log(car)
+  // }
+
+  const car: RaceCar = {
+    name: 'Formula 1',
+    topSpeed: 200,
+    team: 'RedBull',
+  };
+  const logCarInfo = (car: Car) => {
+    console.log(car.name);
+
+    switch (car.topSpeed) {
+      case 200:
+        console.log(car.team);
+        break;
+      default:
+        console.log(car);
+    }
+
+    /*
+     *  TYPE CASTING
+     *  forcing typescipt to assign or cast a type to car
+     */
+    console.log((car as CityCar).space);
+    console.log((<RaceCar>car).team);
+  };
+}
+
+/*
+@ -------------------------
+@ INTERFACE TYPE NARROWING
+@ -------------------------
+*/
+
+interface Champion {
+  race: 'human' | 'elf' | 'orc';
+}
+
+interface Human extends Champion {
+  race: 'human';
+  plains: true;
+}
+
+interface Elf extends Champion {
+  race: 'elf';
+  forest: true;
+}
+
+type Archer = Human | Elf | { race: 'orc'; desert: true };
+
+function playFive(champion: Archer) {
+  if (champion.race === 'human') {
+    console.log(champion.race);
+  } else if (champion.race === 'elf') {
+    console.log(champion.race);
+  } else if (champion.race === 'orc') {
+    console.log(champion.race);
+  }
+}
