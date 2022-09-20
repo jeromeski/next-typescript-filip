@@ -11,7 +11,7 @@ class Person {
 //   (name: string, age: number): string;
 // }
 
-type PersonUserInfo = (name: string, age: number) => string;
+type PersonUserInfo = (name: string, age?: number) => string;
 
 // type Person = {
 //   name: string;
@@ -49,8 +49,17 @@ export default function play() {
     return info;
   }
 
+  const getUserInfo4: PersonUserInfo = (
+    name: string,
+    age: number = 0
+  ): string => {
+    const info = `${name} is ${age}`;
+    return info;
+  };
+
   console.log(getUserInfo2(person));
   console.log(getUserInfo3(new Person('Edward', 42)));
+  console.log(getUserInfo4('Jake'));
   const getUserData = getUserInfo(name, age);
 
   return getUserData;
