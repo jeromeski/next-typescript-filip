@@ -196,14 +196,49 @@ interface Elf extends Champion {
   forest: true;
 }
 
+/*
+@ -----------------
+@     MERGING
+@ -----------------
+@ Refer to interface Champion above
+*/
+
+interface Champion {
+  skills: [string, string];
+}
+
 type Archer = Human | Elf | { race: 'orc'; desert: true };
 
-function playFive(champion: Archer) {
-  if (champion.race === 'human') {
-    console.log(champion.race);
-  } else if (champion.race === 'elf') {
-    console.log(champion.race);
-  } else if (champion.race === 'orc') {
-    console.log(champion.race);
+function playFive() {
+  const getCharacterType = (champion: Archer): string => {
+    if (champion.race === 'human') {
+      console.log(champion.race);
+      return champion.race;
+    } else if (champion.race === 'elf') {
+      console.log(champion.race);
+      return champion.race;
+    } else if (champion.race === 'orc') {
+      console.log(champion.race);
+      return champion.race;
+    }
+  };
+
+  getCharacterType({
+    race: 'human',
+    plains: true,
+    skills: ['farming', 'blacksmith'],
+  });
+
+  /*
+  @
+  @ GENERIC TYPES
+  @
+  */ 
+
+  const myUseGenericTypeFn = (someObj: {[key: string]: string | number | boolean}) => {
+    console.log(someObj)
   }
+  myUseGenericTypeFn({genericObj: true})
 }
+
+playFive();
