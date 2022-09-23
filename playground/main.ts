@@ -294,14 +294,25 @@ function playFive() {
   });
 }
 
+/*
+@--------------------------
+@ SPECIAL TYPE UNKNOWN
+@---------------------------
+@
+*/
+
 const babyToys = {
   buildingBlocks: 5,
   doll: true,
   toyCar: 'lambhorgini',
 };
-
-const useUknownFn = (someObj: { [key: string]: any }) => {
+// any
+const useUknownFn = (someObj: { [key: string]: unknown }) => {
   // console.log(someObj.doll.toUpperCase()); TypeError: someObj.doll.toUpperCase is not a function
+
+  if (typeof someObj.doll === 'string') {
+    console.log(`useUknownFn --> ${someObj.doll.toUpperCase()}`);
+  }
 };
 
 useUknownFn(babyToys);
