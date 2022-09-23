@@ -144,6 +144,7 @@ type CityCar = {
   topSpeed: 100;
 };
 
+// Union
 type Car = RaceCar | CityCar;
 
 function playFour() {
@@ -197,9 +198,9 @@ interface Elf extends Champion {
 }
 
 /*
-@ -----------------
-@     MERGING
-@ -----------------
+@ -------------------------
+@    DECLARATION  MERGING
+@ -------------------------
 @ Refer to interface Champion above
 */
 
@@ -229,16 +230,78 @@ function playFive() {
     skills: ['farming', 'blacksmith'],
   });
 
-  /*
-  @
-  @ GENERIC TYPES
-  @
-  */ 
+  playFive();
 
-  const myUseGenericTypeFn = (someObj: {[key: string]: string | number | boolean}) => {
-    console.log(someObj)
+  /*
+@ -------------------------
+@   NEVER USE CASE
+@ -------------------------
+@ 
+*/
+
+  type Drill = {
+    withCharger: false;
+  };
+
+  type ImpactDrill = {
+    withCharger: true;
+  };
+
+  type Grinder = {
+    // withCharger: false
+    rpm: 2000;
+  };
+
+  type PowerTools = Drill | ImpactDrill | Grinder;
+
+  function playSix(tools: PowerTools) {
+    switch (tools.withCharger) {
+      case true:
+        console.log('You got an impact drill');
+        break;
+      case false:
+        console.log('You got a simple drill');
+        break;
+      default:
+        // Developers wont be able to easily modify the code
+        const _never: never = tools;
+        return _never;
+    }
   }
-  myUseGenericTypeFn({genericObj: true})
+
+  playSix({ withCharger: true });
+
+  /*
+@--------------------------
+@ SPECIFY GENERIC OBJECTS
+@---------------------------
+@
+*/
+
+  // const myUseGenericTypeFn = (someObj: {
+  //   [key: string]: any;
+  // }) => {
+
+  const myUseGenericTypeFn = (someObj: {
+    [key: string]: string | number | boolean;
+  }) => {
+    console.log(someObj);
+  };
+  myUseGenericTypeFn({
+    genericKey1: true,
+    genericKey2: 'Hello',
+    genericKey3: 4,
+  });
 }
 
-playFive();
+const babyToys = {
+  buildingBlocks: 5,
+  doll: true,
+  toyCar: 'lambhorgini',
+};
+
+const useUknownFn = (someObj: { [key: string]: any }) => {
+  // console.log(someObj.doll.toUpperCase()); TypeError: someObj.doll.toUpperCase is not a function
+};
+
+useUknownFn(babyToys);
