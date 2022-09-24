@@ -22,3 +22,9 @@ const x = () => 'BAZZ';
 
 play1(x);
 play2(x);
+
+const useSWR = () => {
+  console.log('Hello World');
+};
+
+useSWR();
